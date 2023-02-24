@@ -4,6 +4,7 @@ import iconeDesfavoritar from './desfavoritar.png'
 
 import React from 'react'
 import { useFavoritoContext } from 'contextos/Favoritos'
+import { Link } from 'react-router-dom'
 
 export default function Card({ id, titulo, capa }) {
     const { favorito, adiconarFavorito } = useFavoritoContext();
@@ -11,8 +12,10 @@ export default function Card({ id, titulo, capa }) {
     const icone = ehFavorito ? iconeDesfavoritar : iconeFavoritar;
     return (
         <div className={styles.container}>
-            <img src={capa} alt={titulo} className={styles.capa} />
-            <h2>{titulo}</h2>
+            <Link className={styles.link} to={`/player/${id}`}>
+                <img src={capa} alt={titulo} className={styles.capa} />
+                <h2>{titulo}</h2>
+            </Link>
             <img src={icone} alt="Favoritar filme" className={styles.favoritar} onClick={() => {
                 adiconarFavorito({ id, titulo, capa })
             }} />
